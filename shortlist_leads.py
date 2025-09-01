@@ -124,8 +124,7 @@ def create_shortlist_record(applicant_record, reasons):
     fields = {
         "Applicant": [applicant_record['id']],  # Link to Applicants table
         "Compressed JSON": applicant_record['fields'].get('Compressed JSON', ''),
-        "Score Reason": " | ".join(reasons),
-        "Created At": datetime.now().isoformat()
+        "Score Reason": " | ".join(reasons)
     }
     
     shortlist_table.create(fields)
