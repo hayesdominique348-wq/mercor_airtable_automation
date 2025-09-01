@@ -79,9 +79,10 @@ def evaluate_applicant_with_llm(applicant_data: Dict[str, Any]) -> Dict[str, Any
         if LANGSMITH_API_KEY:
             try:
                 langsmith_client = Client(api_key=LANGSMITH_API_KEY)
-                langsmith_client.log(
-                    project_name=LANGSMITH_PROJECT,
+                langsmith_client.create_run(
                     name="applicant-evaluation",
+                    run_type="chain",
+                    project_name=LANGSMITH_PROJECT,
                     inputs={"applicant_data": data, "prompt": prompt},
                     outputs={"evaluation": evaluation},
                     metadata={
