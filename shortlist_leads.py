@@ -1,6 +1,6 @@
 """Script to auto-shortlist promising candidates based on defined rules."""
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 from pyairtable import Table
 from config import (
     AIRTABLE_API_KEY, AIRTABLE_BASE_ID,

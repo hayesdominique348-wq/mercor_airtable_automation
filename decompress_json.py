@@ -52,12 +52,17 @@ def upsert_work_experience(applicant_id, applicant_record_id, experience_data):
     
     # Create new records from JSON
     for exp in experience_data:
+        # Handle empty end date - set to None if empty
+        end_date = exp.get("end", "")
+        if end_date == "":
+            end_date = None
+            
         fields = {
             "Applicant ID": [applicant_record_id],  # Link to parent
             "Company": exp.get("company", ""),
             "Title": exp.get("title", ""),
             "Start": exp.get("start", ""),
-            "End": exp.get("end", ""),
+            "End": end_date,
             "Technologies": exp.get("technologies", "")
         }
         experience_table.create(fields)

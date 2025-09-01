@@ -2,6 +2,7 @@
 import sys
 import time
 from compress_json import compress_all_applicants
+from decompress_json import decompress_all_applicants
 from shortlist_leads import shortlist_candidates
 from llm_evaluation import evaluate_all_applicants
 
@@ -45,6 +46,9 @@ def run_single_step(step):
     if step == "compress":
         print_header("Running JSON Compression")
         compress_all_applicants()
+    elif step == "decompress":
+        print_header("Running JSON Decompression")
+        decompress_all_applicants()
     elif step == "shortlist":
         print_header("Running Lead Shortlisting")
         shortlist_candidates()
@@ -53,7 +57,7 @@ def run_single_step(step):
         evaluate_all_applicants()
     else:
         print(f"Unknown step: {step}")
-        print("Valid steps: compress, shortlist, evaluate")
+        print("Valid steps: compress, decompress, shortlist, evaluate")
         sys.exit(1)
 
 
