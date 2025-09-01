@@ -9,8 +9,14 @@
 # Install dependencies
 pip install -r requirements.txt
 
-# Rename .env.example file to .env  and in .env file, replace "your_openai_key_here" with your own open_ai_key.
-OPENAI_API_KEY=your_openai_key_here
+# Create .env.example and configure api_keys.
+AIRTABLE_API_KEY=AIRTABLE_API_KEY
+AIRTABLE_BASE_ID=BASE_ID
+
+OPENAI_API_KEY=YOUR_OPEN_AI_KEY
+
+LANGSMITH_API_KEY=AIRTABLE_API_KEY
+LANGSMITH_PROJECT=PROJECT_ID
 ```
 
 ## 3. Run Automation
