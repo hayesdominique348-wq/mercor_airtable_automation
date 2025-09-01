@@ -9,7 +9,7 @@
 # Install dependencies
 pip install -r requirements.txt
 
-# Create .env.example and configure api_keys.
+# Create .env and configure api_keys.
 AIRTABLE_API_KEY=AIRTABLE_API_KEY
 AIRTABLE_BASE_ID=BASE_ID
 
