@@ -68,6 +68,7 @@ def is_eligible_location(location):
 
 def evaluate_candidate(applicant_data):
     """Evaluate if candidate meets shortlisting criteria."""
+    print("applicant ID", applicant_data.get("Applicant ID"))
     reasons = []
     meets_criteria = True
     
@@ -81,7 +82,7 @@ def evaluate_candidate(applicant_data):
     experience = data.get("experience", [])
     total_years = calculate_total_experience(experience)
     has_tier1, tier1_company = has_tier1_experience(experience)
-    
+   
     if total_years >= MIN_EXPERIENCE_YEARS:
         reasons.append(f"Has {total_years:.1f} years of experience (>= {MIN_EXPERIENCE_YEARS} required)")
     elif has_tier1:
@@ -131,6 +132,19 @@ def create_shortlist_record(applicant_record, reasons):
     print(f"Created shortlist record for {applicant_record['fields'].get('Applicant ID')}")
 
 
+def clear_shortlisted_leads():
+    """Delete all existing records from the Shortlisted Leads table."""
+    shortlist_table = get_table(SHORTLISTED_LEADS_TABLE)
+    all_records = shortlist_table.all()
+    
+    if all_records:
+        for record in all_records:
+            shortlist_table.delete(record['id'])
+        print(f"Deleted {len(all_records)} existing shortlist records")
+    else:
+        print("No existing shortlist records to delete")
+
+
 def update_shortlist_status(applicant_record_id, status):
     """Update the Shortlist Status field in Applicants table."""
     applicants_table = get_table(APPLICANTS_TABLE)
@@ -140,7 +154,9 @@ def update_shortlist_status(applicant_record_id, status):
 def shortlist_candidates():
     """Evaluate all candidates and shortlist those who meet criteria."""
     applicants_table = get_table(APPLICANTS_TABLE)
-    shortlist_table = get_table(SHORTLISTED_LEADS_TABLE)
+    
+    # Clear all existing shortlisted leads first
+    clear_shortlisted_leads()
     
     # Get all applicants with compressed JSON
     applicants = applicants_table.all()
@@ -152,14 +168,6 @@ def shortlist_candidates():
         # Skip if no compressed JSON
         if not applicant['fields'].get('Compressed JSON'):
             print(f"Skipping {applicant_id} - no compressed JSON")
-            continue
-        
-        # Skip if already shortlisted
-        existing_shortlist = shortlist_table.all(
-            formula=f"{{Applicant}} = '{applicant['id']}'"
-        )
-        if existing_shortlist:
-            print(f"Skipping {applicant_id} - already shortlisted")
             continue
         
         # Evaluate candidate
