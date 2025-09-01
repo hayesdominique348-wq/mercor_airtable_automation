@@ -6,7 +6,7 @@ Complete automation system for contractor application processing using Airtable 
 ## Deliverables Completed
 
 ### 1. Airtable Base & Forms ✅
-- **Database Link**: https://airtable.com/appCKy0n6zLw6vmOa/interfaces
+- **Database Link**: https://airtable.com/appCKy0n6zLw6vmOa/shre21c18ufxfUj7N/tblWLJ8QoaXZdLS7g/viwiW1rTpJzNS4Er7
 - **Form Links**: 3 separate forms for Personal Details, Work Experience, and Salary Preferences
 - **Schema**: 5 interconnected tables with proper relationships
 - **Automation**: Native Airtable automations for data flow
@@ -108,7 +108,6 @@ Complete automation system for contractor application processing using Airtable 
 
 ## Files Structure
 ```
-├── README.md              # Main documentation
 ├── DELIVERABLES.md        # Deliverables summary
 ├── QUICKSTART.md          # Quick setup guide
 ├── PROJECT_SUMMARY.md     # This file
